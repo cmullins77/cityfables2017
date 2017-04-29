@@ -1,0 +1,130 @@
+<html>
+  <head>
+    <title>City Fables Project Edit 06</title>
+    <meta name="description" content="City Fables">
+
+   	<script src="js/argon.min.js"></script> <!-- working argon.js -->
+   	<!--<script src="https://unpkg.com/@argonjs/argon@1.1/dist/argon.js"></script> --><!-- oddly, does not work -->
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <script src="https://rawgit.com/argonjs/argon-aframe/master/dist/argon-aframe.js"></script>
+
+  </head>
+  <body>
+  	<h3><mark>
+  	Tap the Screen to start the audio,</br>
+  	Tap the Screen again to stop audio</br>
+  	Look at house targets to play video. When looking away from the targets, the video will pause.
+  	</mark></h3>
+  	<p><mark>(audio may take 15-20 seconds to load)</mark></p>
+     <ar-scene vuforiakey="#vuforiakey"
+              vuforiadataset__aframe-sound="src:url(resources/datasets/aframe-sound.xml);">
+
+    <a-assets>
+    	<a-asset-item id="vuforiakey" src="key.txt"></a-asset-item>
+    	<!-- ADD AUDIO INTO ASSETS -->
+		<audio id="lookbusy" src="resources/audio/lookbusy.mp3" type="audio/mp3" preload="auto"></audio>
+		<audio id="crowd" src="resources/audio/citycrowd-loop.wav" type="audio/wav" preload="auto"></audio>
+		<audio id="horse" src="resources/audio/gallop.wav" type="audio/wav" preload="auto"></audio>
+		<audio id="waves" src="resources/audio/waves1.wav" type="audio/wav" preload="auto"></audio>
+		<audio id="kids" src="resources/audio/kids-playing.wav" type="audio/wav" preload="auto"></audio>
+		<audio id="seagulls" src="resources/audio/seagulls.mp3" type="audio/mp3" preload="auto"></audio>
+    </a-assets>
+	
+		<!-- add AUDIOPLAY into the entity tag -->
+		<!-- AUDIOPLAY is defined in sound.js -->
+
+		<!-- 
+		AUDIOPLAY is a component that simply handles the volume of the audio
+		It's recommended to attach the audio play to each A-Frame entity in order
+		to control and manipulate the different properties of the 'sound' component.
+		For now, it only allows for the adjustment of the volume
+		-->
+
+		<a-sphere position = "-20 0 0" radius = "1"
+				  sound="src: #lookbusy; loop: true; volume: 1" audioplay>
+		</a-sphere>
+
+		<a-sphere position = "10 0 0" radius = "0.5"
+				  sound="src: #waves; loop: true; volume: 0.5" audioplay>
+		</a-sphere>
+
+		<a-sphere position = "-3 0 0" radius = "0.01"
+				  sound="src: #crowd; loop: true; volume: 0.8" audioplay>
+		</a-sphere>
+
+		<a-sphere position = "10 0 0" radius = "0.5"
+				  sound="src: #kids; loop: true; volume: 0.8" audioplay>
+		</a-sphere>
+
+		<!-- For entity movement, use the <a-animation>, defined in A-Frame docs -->
+		<a-sphere position = "-1 0 100" radius = "0.5"
+				  sound="src: #horse; loop: true; volume: 0.30" audioplay>
+			<a-animation attribute="position"
+						 from="-1 0 100" to="-1 0 -50"
+						 dur ="60000"
+						 repeat="indefinite">			 	
+			</a-animation>
+		</a-sphere>
+
+		<a-sphere position = "60 4 10" radius = "0.5"
+				  sound="src: #seagulls; loop: true; volume: .10" audioplay>
+			<a-animation attribute="position"
+						 from="40 10 20" to="0 20 0"
+						 dur="30000" direction="alternate" 
+						 repeat="indefinite">
+			</a-animation>
+		</a-sphere>
+
+		<!--
+		The LOWAUDIO tag will reduce the audio of every entity that has an AUDIOPLAY tag.
+		This will happen when the vuforia image is FOUND. It will reduce to 15% by default.
+		When the user looks away from the vuforia image (LOST), it will return surrounding audio back to normal.
+		defined in 'sound.js'
+
+		The VIDEOPLAY tag attaches the src of the video to the frame
+		defined in 'video.js'
+		-->
+		<ar-frame id="frame1" trackvisbility="true" visible="false" lowaudio videoplay="url: resources/video/josefina.3gp"
+				  parent="vuforia.aframe-sound.house1" position="0 0 0" rotation="0 0 0">
+       		<a-entity scale="1 1 1">
+        		<a-entity  position= " 1 1 -4" rotation="45 0 0"></a-entity> 
+       		</a-entity>
+      	</ar-frame>
+     
+      	<ar-frame id="frame2" trackvisbility="true" visible="false" lowaudio videoplay="url: resources/video/LarsH.3gp"
+				  parent="vuforia.aframe-sound.house2" position="0 0 0" rotation="0 0 0">
+       		<a-entity scale="1 1 1">
+        		<a-entity  position= " 1 1 -4" rotation="45 0 0"></a-entity> 
+       		</a-entity>
+      	</ar-frame>
+      	
+      	<ar-frame id="frame3" trackvisbility="true" visible="false" lowaudio videoplay="url: resources/video/nils.3gp"
+				  parent="vuforia.aframe-sound.house3" position="0 0 0" rotation="0 0 0">
+       		<a-entity scale="1 1 1">
+        		<a-entity  position= " 1 1 -4" rotation="45 0 0"></a-entity> 
+       		</a-entity>
+      	</ar-frame>
+
+      	<ar-frame id="frame4" trackvisbility="true" visible="false" lowaudio videoplay="url: resources/video/Dory.mp4"
+				  parent="vuforia.aframe-sound.house4" position="0 0 0" rotation="0 0 0">
+       		<a-entity scale="1 1 1">
+        		<a-entity  position= " 1 1 -4" rotation="45 0 0"></a-entity> 
+       		</a-entity>
+      	</ar-frame>
+
+      	<ar-frame id="frame5" trackvisbility="true" visible="false" lowaudio videoplay="url: resources/video/asta_dec.3gp"
+				  parent="vuforia.aframe-sound.house5" position="0 0 0" rotation="0 0 0">
+       		<a-entity scale="1 1 1">
+        		<a-entity  position= " 1 1 -4" rotation="45 0 0"></a-entity> 
+       		</a-entity>
+      	</ar-frame>
+
+
+    </ar-scene>
+  <div id="container"></div>
+  <!-- script for the sound manipulation in A-Frame -->
+  <script src="sound.js"></script>
+  <script src="video.js"></script>
+
+  </body>
+</html>
